@@ -1,9 +1,8 @@
-import math
+from generators.SequenceInterface import ISequence
 from array import array
-import SequenceInterface
 
 
-class LehmerSequence(SequenceInterface.ISequence):
+class LehmerSequence(ISequence):
     def __init__(self, a, m, r0):
         self.__a = a
         self.__m = m
