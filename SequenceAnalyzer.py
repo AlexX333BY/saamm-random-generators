@@ -26,12 +26,10 @@ class SequenceAnalyzer:
         return cur_index if cur_index < sequence_length else -1
 
     def get_period_length(self):
-        first_duplicate_index = self.__get_first_duplicate_index()
-        if first_duplicate_index != -1:
-            second_duplicate_index = self.__sequence[(first_duplicate_index + 1):] \
-                .index(self.__sequence[first_duplicate_index]) + first_duplicate_index + 1
-            return second_duplicate_index - first_duplicate_index
-        else:
+        try:
+            sequence_length = len(self.__sequence)
+            return self.__sequence[(sequence_length - 2)::-1].index(self.__sequence[sequence_length - 1])
+        except ValueError:
             return 0
 
     def get_aperiodicity_interval_length(self):
