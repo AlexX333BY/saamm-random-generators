@@ -1,5 +1,7 @@
 import math
+from array import array
 import SequenceInterface
+
 
 class LehmerSequence(SequenceInterface.ISequence):
     def __init__(self, a, m, r0):
@@ -9,7 +11,7 @@ class LehmerSequence(SequenceInterface.ISequence):
         self.__r = r0
         
     def provide_sequence(self, sequence_length):
-        random_sequence = []
+        random_sequence = array('f')
         for i in range(sequence_length):
             random_sequence.append(self.next_number())
         return random_sequence
