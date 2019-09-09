@@ -18,25 +18,24 @@ class SequenceAnalyzer:
     def get_standard_deviation_estimate(self):
         return math.sqrt(self.get_variance_estimate())
 
-    def __get_first_duplicate_index(self):
-        cur_index = 0
-        sequence_length = len(self.__sequence)
-        while (cur_index < sequence_length) and (self.__sequence.count(self.__sequence[cur_index]) < 2):
-            cur_index += 1
-        return cur_index if cur_index < sequence_length else -1
-
     def get_period_length(self):
-        first_duplicate_index = self.__get_first_duplicate_index()
-        if first_duplicate_index != -1:
-            second_duplicate_index = self.__sequence[(first_duplicate_index + 1):] \
-                .index(self.__sequence[first_duplicate_index]) + first_duplicate_index + 1
-            return second_duplicate_index - first_duplicate_index
-        else:
+        try:
+            sequence_length = len(self.__sequence)
+            return self.__sequence[(sequence_length - 2)::-1].index(self.__sequence[sequence_length - 1]) + 1
+        except ValueError:
             return 0
 
     def get_aperiodicity_interval_length(self):
-        first_duplicate_index = self.__get_first_duplicate_index()
-        return first_duplicate_index if first_duplicate_index != -1 else len(self.__sequence)
+        period_length = self.get_period_length()
+        aperiodicity_interval = 0
+        if period_length != 0:
+            first_duplicate_index = 0
+            while self.__sequence[first_duplicate_index] != self.__sequence[first_duplicate_index + period_length]:
+                first_duplicate_index += 1
+            aperiodicity_interval = first_duplicate_index + period_length
+        else:
+            aperiodicity_interval = len(self.__sequence)
+        return aperiodicity_interval
 
     def get_indirect_sign(self):
         points_in_circle_count = 0
