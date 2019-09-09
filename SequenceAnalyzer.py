@@ -28,8 +28,9 @@ class SequenceAnalyzer:
     def get_period_length(self):
         first_duplicate_index = self.__get_first_duplicate_index()
         if first_duplicate_index != -1:
-            return self.__sequence.index(self.__sequence[first_duplicate_index], first_duplicate_index + 1) \
-                   - first_duplicate_index
+            second_duplicate_index = self.__sequence[(first_duplicate_index + 1):] \
+                .index(self.__sequence[first_duplicate_index]) + first_duplicate_index + 1
+            return second_duplicate_index - first_duplicate_index
         else:
             return 0
 
