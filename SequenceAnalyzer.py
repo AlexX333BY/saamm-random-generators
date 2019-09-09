@@ -39,7 +39,7 @@ class SequenceAnalyzer:
 
     def get_indirect_sign(self):
         points_in_circle_count = 0
-        for pairNo in range(0, len(self.__sequence) // 2):
-            if (self.__sequence[2 * pairNo] ** 2 + self.__sequence[2 * pairNo + 1] ** 2) < 1:
+        for pair_no in range(0, len(self.__sequence) // 2):
+            if (self.__sequence[2 * pair_no] ** 2 + self.__sequence[2 * pair_no + 1] ** 2) < 1:
                 points_in_circle_count += 1
         return 2 * points_in_circle_count / len(self.__sequence)
