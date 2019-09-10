@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 
 
 def draw_chart(sequence, intervals_count=20):
-    plt.rcParams["patch.force_edgecolor"] = True
+    plt.rcParams['patch.force_edgecolor'] = True
+    plt.rcParams['toolbar'] = 'None'
     plt.hist(sequence, bins=intervals_count)
     plt.show()
 
