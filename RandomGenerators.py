@@ -6,7 +6,7 @@ class IRandomGenerator:
     def get_sequence(self, sequence_length): raise NotImplementedError
 
 
-class LehmerRandomGenerator(IRandomGenerator):
+class LehmerUniformDistributionGenerator(IRandomGenerator):
     def __init__(self, a, m, r0):
         self.__a = a
         self.__m = m
