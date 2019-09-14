@@ -1,5 +1,6 @@
 import argparse
 from RandomGenerators import LehmersUniformDistributionGenerator
+from RandomGenerators import UniformDistributionGenerator
 from RandomSequencesAnalyzers import LehmersUniformSequenceAnalyzer, RandomSequenceAnalyzer
 import matplotlib.pyplot as plt
 
@@ -12,7 +13,12 @@ def get_lehmers_generator(arguments_parser):
     return LehmersUniformDistributionGenerator(args.a, args.m, args.r0)
 
 
-def get_uniform_generator(arguments_parser): raise NotImplementedError
+def get_uniform_generator(arguments_parser):
+    arguments_parser.add_argument('--min', action='store', type=float, required=True, help='minimum value', dest='min')
+    arguments_parser.add_argument('--max', action='store', type=float, required=True, help='maximum value', dest='max')
+    lehmers_generator = get_lehmers_generator(arguments_parser)
+    args = arguments_parser.parse_args()
+    return UniformDistributionGenerator(args.min, args.max, lehmers_generator)
 
 
 def get_gaussian_generator(arguments_parser): raise NotImplementedError
