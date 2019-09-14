@@ -1,6 +1,7 @@
 import argparse
 from RandomGenerators import LehmersUniformDistributionGenerator
 from RandomGenerators import UniformDistributionGenerator
+from RandomGenerators import GaussianDistributionGenerator
 from RandomSequencesAnalyzers import LehmersUniformSequenceAnalyzer, RandomSequenceAnalyzer
 import matplotlib.pyplot as plt
 
@@ -21,7 +22,17 @@ def get_uniform_generator(arguments_parser):
     return UniformDistributionGenerator(args.min, args.max, lehmers_generator)
 
 
-def get_gaussian_generator(arguments_parser): raise NotImplementedError
+def get_gaussian_generator(arguments_parser):
+    arguments_parser.add_argument('--expected-value', action='store', type=float, required=True, help='expected value',
+                                  dest='expected_value')
+    arguments_parser.add_argument('--standard-deviation', action='store', type=float, required=True,
+                                  help='standard deviation', dest='standard_deviation')
+    arguments_parser.add_argument('--uniform-per-generated', action='store', type=int, required=False, default=6,
+                                  help='uniform distributed numbers count per generated one', dest='uniform_count')
+    lehmers_generator = get_lehmers_generator(arguments_parser)
+    args = arguments_parser.parse_args()
+    return GaussianDistributionGenerator(args.expected_value, args.standard_deviation, lehmers_generator,
+                                         args.uniform_count)
 
 
 def get_exponential_generator(arguments_parser): raise NotImplementedError
