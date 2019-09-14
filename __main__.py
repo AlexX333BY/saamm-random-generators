@@ -1,6 +1,7 @@
 import argparse
 from RandomGenerators import LehmersUniformDistributionGenerator
 from RandomGenerators import UniformDistributionGenerator
+from RandomGenerators import ExponentialDistributionGenerator
 from RandomSequencesAnalyzers import LehmersUniformSequenceAnalyzer, RandomSequenceAnalyzer
 import matplotlib.pyplot as plt
 
@@ -24,7 +25,12 @@ def get_uniform_generator(arguments_parser):
 def get_gaussian_generator(arguments_parser): raise NotImplementedError
 
 
-def get_exponential_generator(arguments_parser): raise NotImplementedError
+def get_exponential_generator(arguments_parser):
+    arguments_parser.add_argument('--param', action='store', type=float, required=True,
+                                  help='exponential distribution parameter', dest='param')
+    lehmers_generator = get_lehmers_generator(arguments_parser)
+    args = arguments_parser.parse_args()
+    return ExponentialDistributionGenerator(args.param, lehmers_generator)
 
 
 def get_gamma_generator(arguments_parser): raise NotImplementedError
