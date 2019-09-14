@@ -1,4 +1,5 @@
 from array import array
+import math
 
 
 class RandomGeneratorBase:
@@ -34,3 +35,12 @@ class UniformDistributionGenerator(RandomGeneratorBase):
 
     def get_next(self):
         return self.__min + (self.__max - self.__min) * self.__uniform_generator.get_next()
+
+
+class ExponentialDistributionGenerator(RandomGeneratorBase):
+    def __init__(self, exponential_parameter, zero_to_one_uniform_generator):
+        self.__parameter = exponential_parameter
+        self.__uniform_generator = zero_to_one_uniform_generator
+
+    def get_next(self):
+        return -1 / self.__parameter * math.log1p(self.__uniform_generator.get_next())
