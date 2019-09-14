@@ -1,4 +1,5 @@
 from array import array
+import math
 
 
 class RandomGeneratorBase:
@@ -34,3 +35,19 @@ class UniformDistributionGenerator(RandomGeneratorBase):
 
     def get_next(self):
         return self.__min + (self.__max - self.__min) * self.__uniform_generator.get_next()
+
+
+class GaussianDistributionGenerator(RandomGeneratorBase):
+    def __init__(self, expected_value, standard_deviation, zero_to_one_uniform_generator,
+                 uniform_per_generated_numbers_count=6):
+        self.__expected_value = expected_value
+        self.__standard_deviation = standard_deviation
+        self.__uniform_generator = zero_to_one_uniform_generator
+        self.__uniform_per_generated = uniform_per_generated_numbers_count
+
+    def get_next(self):
+        uniform_sum = 0.0
+        for i in range(self.__uniform_per_generated):
+            uniform_sum += self.__uniform_generator.get_next()
+        return self.__expected_value + self.__standard_deviation * math.sqrt(12 / self.__uniform_per_generated) \
+               * (uniform_sum - self.__uniform_per_generated / 2)
