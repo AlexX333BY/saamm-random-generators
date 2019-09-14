@@ -24,3 +24,13 @@ class LehmersUniformDistributionGenerator(RandomGeneratorBase):
 
     def reset(self):
         self.__r = self.__r0
+
+
+class UniformDistributionGenerator(RandomGeneratorBase):
+    def __init__(self, min_value, max_value, lehmers_generator):
+        self.__min = min_value
+        self.__max = max_value
+        self.__lehmers_generator = lehmers_generator
+
+    def get_next(self):
+        return self.__min + (self.__max - self.__min) * self.__lehmers_generator.get_next()
