@@ -51,3 +51,12 @@ class GaussianDistributionGenerator(RandomGeneratorBase):
             uniform_sum += self.__uniform_generator.get_next()
         return self.__expected_value + self.__standard_deviation * math.sqrt(12 / self.__uniform_per_generated) \
                * (uniform_sum - self.__uniform_per_generated / 2)
+
+      
+class ExponentialDistributionGenerator(RandomGeneratorBase):
+    def __init__(self, exponential_parameter, zero_to_one_uniform_generator):
+        self.__parameter = exponential_parameter
+        self.__uniform_generator = zero_to_one_uniform_generator
+
+    def get_next(self):
+        return -1 / self.__parameter * math.log1p(self.__uniform_generator.get_next())
