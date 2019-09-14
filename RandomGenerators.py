@@ -39,7 +39,7 @@ class UniformDistributionGenerator(RandomGeneratorBase):
 
 class GaussianDistributionGenerator(RandomGeneratorBase):
     def __init__(self, expected_value, standard_deviation, zero_to_one_uniform_generator,
-                 uniform_per_generated_numbers_count=6):
+                 uniform_per_generated_numbers_count):
         self.__expected_value = expected_value
         self.__standard_deviation = standard_deviation
         self.__uniform_generator = zero_to_one_uniform_generator
