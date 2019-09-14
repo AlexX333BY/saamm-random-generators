@@ -46,7 +46,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', '--distribution', action='store', required=True, help='distribution type',
                         choices=generator_providers.keys(), dest='distribution')
-    args, _ = parser.parse_known_args()
+    args = parser.parse_known_args()[0]
 
     parser.add_argument('-l', '--length', action='store', type=int, required=True,
                         help='generated sequence length', dest='length')
