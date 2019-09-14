@@ -1,6 +1,6 @@
 import argparse
 from RandomGenerators import LehmerUniformDistributionGenerator
-from RandomSequencesAnalyzers import SequenceAnalyzer
+from RandomSequencesAnalyzers import LehmerUniformSequenceAnalyzer
 import matplotlib.pyplot as plt
 
 
@@ -23,7 +23,7 @@ def main():
     lehmer_generator = LehmerUniformDistributionGenerator(args.a, args.m, args.r0)
     sequence = lehmer_generator.get_sequence(args.length)
 
-    analyzer = SequenceAnalyzer(sequence)
+    analyzer = LehmerUniformSequenceAnalyzer(sequence)
 
     print("Оценки:")
     print("\tматематического ожидания: ", analyzer.get_expected_value_estimate())

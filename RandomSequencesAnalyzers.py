@@ -7,7 +7,7 @@ class IRandomSequenceAnalyzer:
     def get_standard_deviation_estimate(self): raise NotImplementedError
 
 
-class SequenceAnalyzer:
+class LehmerUniformSequenceAnalyzer(IRandomSequenceAnalyzer):
     def __init__(self, sequence):
         self.__sequence = sequence
 
