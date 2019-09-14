@@ -4,6 +4,32 @@ from RandomSequencesAnalyzers import LehmerUniformSequenceAnalyzer
 import matplotlib.pyplot as plt
 
 
+def get_lehmer_generator(arguments_parser):
+    arguments_parser.add_argument('-a', action='store', type=int, required=True, help='value of a', dest='a')
+    arguments_parser.add_argument('-m', action='store', type=int, required=True, help='value of m', dest='m')
+    arguments_parser.add_argument('-r0', action='store', type=int, required=True, help='value of R0', dest='r0')
+    args = arguments_parser.parse_args()
+    return LehmerUniformDistributionGenerator(args.a, args.m, args.r0)
+
+
+def get_uniform_generator(arguments_parser): raise NotImplementedError
+
+
+def get_gaussian_generator(arguments_parser): raise NotImplementedError
+
+
+def get_exponential_generator(arguments_parser): raise NotImplementedError
+
+
+def get_gamma_generator(arguments_parser): raise NotImplementedError
+
+
+def get_triangle_generator(arguments_parser): raise NotImplementedError
+
+
+def get_simpsons_generator(arguments_parser): raise NotImplementedError
+
+
 def draw_chart(sequence, intervals_count=20):
     plt.rcParams['patch.force_edgecolor'] = True
     plt.rcParams['toolbar'] = 'None'
@@ -12,17 +38,22 @@ def draw_chart(sequence, intervals_count=20):
 
 
 def main():
+    generator_providers = {'lehmers': get_lehmer_generator, 'uniform': get_uniform_generator,
+                           'gaussian': get_gaussian_generator, 'exponential': get_exponential_generator,
+                           'gamma': get_gamma_generator, 'triangle': get_triangle_generator,
+                           'simpsons': get_simpsons_generator}
+
     parser = argparse.ArgumentParser()
-    parser.add_argument('-a', action='store', type=int, required=True, help='value of a', dest='a')
-    parser.add_argument('-m', action='store', type=int, required=True, help='value of m', dest='m')
-    parser.add_argument('-r0', action='store', type=int, required=True, help='value of R0', dest='r0')
+    parser.add_argument('-d', '--distribution', action='store', required=True, help='distribution type',
+                        choices=generator_providers.keys(), dest='distribution')
+    args = parser.parse_known_args()[0]
+
     parser.add_argument('-l', '--length', action='store', type=int, required=True,
                         help='generated sequence length', dest='length')
+    sequence_generator = generator_providers[args.distribution](parser)
     args = parser.parse_args()
 
-    lehmer_generator = LehmerUniformDistributionGenerator(args.a, args.m, args.r0)
-    sequence = lehmer_generator.get_sequence(args.length)
-
+    sequence = sequence_generator.get_sequence(args.length)
     analyzer = LehmerUniformSequenceAnalyzer(sequence)
 
     print("Оценки:")
