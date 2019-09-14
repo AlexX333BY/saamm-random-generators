@@ -1,5 +1,8 @@
-from generators.SequenceInterface import ISequence
 from array import array
+
+
+class ISequence:
+    def provide_sequence(self, sequence_length): raise NotImplementedError
 
 
 class LehmerSequence(ISequence):
@@ -8,16 +11,16 @@ class LehmerSequence(ISequence):
         self.__m = m
         self.__r0 = r0
         self.__r = r0
-        
+
     def provide_sequence(self, sequence_length):
         random_sequence = array('f')
         for i in range(sequence_length):
             random_sequence.append(self.next_number())
         return random_sequence
-        
+
     def next_number(self):
         self.__r = self.__a * self.__r % self.__m
         return self.__r / self.__m
-    
+
     def reset(self):
         self.__r = self.__r0

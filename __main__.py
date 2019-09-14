@@ -1,5 +1,5 @@
 import argparse
-from generators.LehmerSequence import LehmerSequence
+from RandomGenerators import LehmerSequence
 from SequenceAnalyzer import SequenceAnalyzer
 import matplotlib.pyplot as plt
 
