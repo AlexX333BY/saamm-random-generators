@@ -1,6 +1,6 @@
 import argparse
 from RandomGenerators import LehmerUniformDistributionGenerator
-from SequenceAnalyzer import SequenceAnalyzer
+from RandomSequencesAnalyzers import SequenceAnalyzer
 import matplotlib.pyplot as plt
 
 

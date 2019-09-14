@@ -1,6 +1,12 @@
 import math
 
 
+class IRandomSequenceAnalyzer:
+    def get_expected_value_estimate(self): raise NotImplementedError
+    def get_variance_estimate(self): raise NotImplementedError
+    def get_standard_deviation_estimate(self): raise NotImplementedError
+
+
 class SequenceAnalyzer:
     def __init__(self, sequence):
         self.__sequence = sequence
