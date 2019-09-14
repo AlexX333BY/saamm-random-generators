@@ -1,7 +1,13 @@
 import math
 
 
-class SequenceAnalyzer:
+class IRandomSequenceAnalyzer:
+    def get_expected_value_estimate(self): raise NotImplementedError
+    def get_variance_estimate(self): raise NotImplementedError
+    def get_standard_deviation_estimate(self): raise NotImplementedError
+
+
+class LehmerUniformSequenceAnalyzer(IRandomSequenceAnalyzer):
     def __init__(self, sequence):
         self.__sequence = sequence
 
