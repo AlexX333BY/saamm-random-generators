@@ -1,5 +1,5 @@
 import argparse
-from RandomGenerators import LehmerSequence
+from RandomGenerators import LehmerRandomGenerator
 from SequenceAnalyzer import SequenceAnalyzer
 import matplotlib.pyplot as plt
 
@@ -20,8 +20,8 @@ def main():
                         help='generated sequence length', dest='length')
     args = parser.parse_args()
 
-    lehmer_generator = LehmerSequence(args.a, args.m, args.r0)
-    sequence = lehmer_generator.provide_sequence(args.length)
+    lehmer_generator = LehmerRandomGenerator(args.a, args.m, args.r0)
+    sequence = lehmer_generator.get_sequence(args.length)
 
     analyzer = SequenceAnalyzer(sequence)
 

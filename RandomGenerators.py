@@ -1,24 +1,25 @@
 from array import array
 
 
-class ISequence:
-    def provide_sequence(self, sequence_length): raise NotImplementedError
+class IRandomGenerator:
+    def get_next(self): raise NotImplementedError
+    def get_sequence(self, sequence_length): raise NotImplementedError
 
 
-class LehmerSequence(ISequence):
+class LehmerRandomGenerator(IRandomGenerator):
     def __init__(self, a, m, r0):
         self.__a = a
         self.__m = m
         self.__r0 = r0
         self.__r = r0
 
-    def provide_sequence(self, sequence_length):
+    def get_sequence(self, sequence_length):
         random_sequence = array('f')
         for i in range(sequence_length):
-            random_sequence.append(self.next_number())
+            random_sequence.append(self.get_next())
         return random_sequence
 
-    def next_number(self):
+    def get_next(self):
         self.__r = self.__a * self.__r % self.__m
         return self.__r / self.__m
 
