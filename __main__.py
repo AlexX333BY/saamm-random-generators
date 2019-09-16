@@ -42,23 +42,23 @@ def get_exponential_generator(arguments_parser):
 
 
 def get_gamma_generator(arguments_parser):
-    arguments_parser.add_argument('--param_nu', action='store', type=float, required=True,
+    arguments_parser.add_argument('--nu', action='store', type=float, required=True,
                                   help='gamma parameter nu', dest='param_nu')
-    arguments_parser.add_argument('--param_lambda', action='store', type=float, required=True,
+    arguments_parser.add_argument('--lambda', action='store', type=float, required=True,
                                   help='gamma parameter lambda', dest='param_lambda')
     lehmers_generator = get_lehmers_generator(arguments_parser)
     args = arguments_parser.parse_args()
-    return GammaDistributionGenerator(args.param, lehmers_generator)
+    return GammaDistributionGenerator(args.param_nu, args.param_lambda, lehmers_generator)
 
 
 def get_triangle_generator(arguments_parser):
-    arguments_parser.add_argument('--param_a', action='store', type=float, required=True,
+    arguments_parser.add_argument('--a', action='store', type=float, required=True,
                                   help='triangle parameter a', dest='param_a')
-    arguments_parser.add_argument('--param_b', action='store', type=float, required=True,
+    arguments_parser.add_argument('--b', action='store', type=float, required=True,
                                   help='triangle parameter b', dest='param_b')
     lehmers_generator = get_lehmers_generator(arguments_parser)
     args = arguments_parser.parse_args()
-    return TriangleDistributionGenerator(args.param, lehmers_generator)
+    return TriangleDistributionGenerator(args.param_a, args.param_b, lehmers_generator)
 
 
 def get_simpsons_generator(arguments_parser):
