@@ -44,14 +44,28 @@ def get_exponential_generator(arguments_parser):
     return ExponentialDistributionGenerator(args.param, lehmers_generator)
 
 
-def get_gamma_generator(arguments_parser): raise NotImplementedError
+def get_gamma_generator(arguments_parser):
+    arguments_parser.add_argument('--param_nu', action='store', type=float, required=True,
+                                  help='gamma parameter nu', dest='param_nu')
+    arguments_parser.add_argument('--param_lambda', action='store', type=float, required=True,
+                                  help='gamma parameter lambda', dest='param_lambda')
+    lehmers_generator = get_lehmers_generator(arguments_parser)
+    args = arguments_parser.parse_args()
+    return GammaDistributionGenerator(args.param, lehmers_generator)
 
 
-def get_triangle_generator(arguments_parser): raise NotImplementedError
+def get_triangle_generator(arguments_parser):
+    arguments_parser.add_argument('--param_a', action='store', type=float, required=True,
+                                  help='triangle parameter a', dest='param_a')
+    arguments_parser.add_argument('--param_b', action='store', type=float, required=True,
+                                  help='triangle parameter b', dest='param_b')
+    lehmers_generator = get_lehmers_generator(arguments_parser)
+    args = arguments_parser.parse_args()
+    return TriangleDistributionGenerator(args.param, lehmers_generator)
 
 
-def get_simpsons_generator(arguments_parser): raise NotImplementedError
-
+def get_simpsons_generator(arguments_parser):
+    return SimpsonDistributionGenerator(get_uniform_generator(arguments_parser))
 
 def draw_chart(sequence, intervals_count=20):
     plt.rcParams['patch.force_edgecolor'] = True
