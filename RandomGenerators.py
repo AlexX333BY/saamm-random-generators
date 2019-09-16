@@ -84,7 +84,7 @@ class TriangleDistributionGenerator(RandomGeneratorBase):
     def get_next(self):
         r_1 = self.__uniform_generator.get_next()
         r_2 = self.__uniform_generator.get_next()
-        return self.__parametr_a + (self.__parametr_b - self.__parametr_a) * math.max_value(r_1, r_2)
+        return self.__parametr_a + (self.__parametr_b - self.__parametr_a) * max(r_1, r_2)
 
 
 class SimpsonDistributionGenerator(RandomGeneratorBase):
