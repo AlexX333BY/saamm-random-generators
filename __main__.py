@@ -62,7 +62,14 @@ def get_triangle_generator(arguments_parser):
 
 
 def get_simpsons_generator(arguments_parser):
-    return SimpsonDistributionGenerator(get_uniform_generator(arguments_parser))
+    arguments_parser.add_argument('--a', action='store', type=float, required=True,
+                                  help='triangle parameter a', dest='param_a')
+    arguments_parser.add_argument('--b', action='store', type=float, required=True,
+                                  help='triangle parameter b', dest='param_b')
+    lehmers_generator = get_lehmers_generator(arguments_parser)
+    args = arguments_parser.parse_args()
+    uniform_generator = UniformDistributionGenerator(args.param_a / 2, args.param_b / 2, lehmers_generator)
+    return SimpsonDistributionGenerator(uniform_generator)
 
 
 def draw_chart(sequence, intervals_count=20):
