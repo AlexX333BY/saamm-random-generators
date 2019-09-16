@@ -52,7 +52,7 @@ class GaussianDistributionGenerator(RandomGeneratorBase):
         return self.__expected_value + self.__standard_deviation * math.sqrt(12 / self.__uniform_per_generated) \
                * (uniform_sum - self.__uniform_per_generated / 2)
 
-      
+
 class ExponentialDistributionGenerator(RandomGeneratorBase):
     def __init__(self, exponential_parameter, zero_to_one_uniform_generator):
         self.__parameter = exponential_parameter
@@ -60,6 +60,7 @@ class ExponentialDistributionGenerator(RandomGeneratorBase):
 
     def get_next(self):
         return -1 / self.__parameter * math.log1p(self.__uniform_generator.get_next())
+
 
 class GammaDistributionGenerator(RandomGeneratorBase):
     def __init__(self, parametr_nu, parametr_lambda, zero_to_one_uniform_generator):
@@ -73,6 +74,7 @@ class GammaDistributionGenerator(RandomGeneratorBase):
             uniform_composition *= self.__uniform_generator.get_next()
         return -1 / self.__parametr_lambda * math.log1p(uniform_composition)
 
+
 class TriangleDistributionGenerator(RandomGeneratorBase):
     def __init__(self, parametr_a, parametr_b, zero_to_one_uniform_generator):
         self.__parametr_a = parametr_a
@@ -84,6 +86,7 @@ class TriangleDistributionGenerator(RandomGeneratorBase):
         r_2 = self.__uniform_generator.get_next()
         return self.__parametr_a + (self.__parametr_b - self.__parametr_a) * math.max_value(r_1, r_2)
 
+
 class SimpsonDistributionGenerator(RandomGeneratorBase):
     def __init__(self, uniform_generator):
         self.__uniform_generator = uniform_generator
@@ -92,4 +95,3 @@ class SimpsonDistributionGenerator(RandomGeneratorBase):
         y = self.__uniform_generator.get_next()
         z = self.__uniform_generator.get_next()
         return y + z
-        

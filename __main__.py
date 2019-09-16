@@ -1,8 +1,5 @@
 import argparse
-from RandomGenerators import LehmersUniformDistributionGenerator
-from RandomGenerators import UniformDistributionGenerator
-from RandomGenerators import GaussianDistributionGenerator
-from RandomGenerators import ExponentialDistributionGenerator
+from RandomGenerators import *
 from RandomSequencesAnalyzers import LehmersUniformSequenceAnalyzer, RandomSequenceAnalyzer
 import matplotlib.pyplot as plt
 
@@ -66,6 +63,7 @@ def get_triangle_generator(arguments_parser):
 
 def get_simpsons_generator(arguments_parser):
     return SimpsonDistributionGenerator(get_uniform_generator(arguments_parser))
+
 
 def draw_chart(sequence, intervals_count=20):
     plt.rcParams['patch.force_edgecolor'] = True
