@@ -59,7 +59,7 @@ class ExponentialDistributionGenerator(RandomGeneratorBase):
         self.__uniform_generator = zero_to_one_uniform_generator
 
     def get_next(self):
-        return -1 / self.__parameter * math.log1p(self.__uniform_generator.get_next())
+        return -1 / self.__parameter * math.log(self.__uniform_generator.get_next())
 
 
 class GammaDistributionGenerator(RandomGeneratorBase):
@@ -72,7 +72,7 @@ class GammaDistributionGenerator(RandomGeneratorBase):
         uniform_composition = 1.0
         for i in range(self.__parametr_nu):
             uniform_composition *= self.__uniform_generator.get_next()
-        return -1 / self.__parametr_lambda * math.log1p(uniform_composition)
+        return -1 / self.__parametr_lambda * math.log(uniform_composition)
 
 
 class TriangleDistributionGenerator(RandomGeneratorBase):
