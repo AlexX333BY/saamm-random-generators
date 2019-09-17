@@ -42,7 +42,7 @@ def get_exponential_generator(arguments_parser):
 
 
 def get_gamma_generator(arguments_parser):
-    arguments_parser.add_argument('--nu', action='store', type=float, required=True,
+    arguments_parser.add_argument('--nu', action='store', type=int, required=True,
                                   help='gamma parameter nu', dest='param_nu')
     arguments_parser.add_argument('--lambda', action='store', type=float, required=True,
                                   help='gamma parameter lambda', dest='param_lambda')
